@@ -1,4 +1,4 @@
-*TO USE THE APP, FIRSTLY YOU MUST INSTALL PyQt6 AND Pillow LIBRARIES*
+*TO USE THE APP, FIRSTLY YOU MUST INSTALL PyQt6 AND PIL LIBRARIES*
 *To start: python3 main.py*
 
 Please, before typing anything, consider, that this project was created only for developing my programming skills.
