@@ -1,13 +1,13 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from window import Ui_MainWindow
+from PyQt5 import uic
 import functions
 
 
-class MyWidget(QMainWindow, Ui_MainWindow):
+class MyWidget(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        uic.loadUi('Test.ui', self)
         self.image = functions.open_image(input())
         self.Open_PushButton.clicked.connect(self.open_picture())
         self.Crop_PushButton.clicked.connect(self.image.crop_image(self.Crop_X_Value_1.text(),

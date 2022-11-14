@@ -1,4 +1,4 @@
-*TO USE THE APP, FIRSTLY YOU MUST INSTALL PyQt6 AND PIL LIBRARIES**To start: python3 main.py*
+*TO USE THE APP, FIRSTLY YOU MUST INSTALL PyQt5 AND PIL LIBRARIES**To start: python3 main.py*
 
 Current version: 0.1.1
 
