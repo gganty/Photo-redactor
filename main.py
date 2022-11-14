@@ -1,34 +1,31 @@
-from PyQt6.QtWidgets import *  # star is used for importing all functions of a library to use them without PyQt6. ...
-from PyQt6.QtCore import *
+import sys
+from PyQt5.QtWidgets import QApplication, QMainWindow
+from window import Ui_MainWindow
 import functions
-import sys  # only for cmd allowance
 
 
-class MainWindow(QMainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
-        super(MainWindow, self).__init__()
+        super().__init__()
+        self.setupUi(self)
+        self.image = functions.open_image(input())
+        self.Open_PushButton.clicked.connect(self.open_picture())
+        self.Crop_PushButton.clicked.connect(self.image.crop_image(self.Crop_X_Value_1.text(),
+                                                                   self.Crop_Y_Value_1.text(),
+                                                                   self.Crop_X_Value_2.text(),
+                                                                   self.Crop_Y_Value_2.text()))
+        self.BW_PushButton.clicked.connect(self.image.bw())
+        self.Invert_PushButton.clicked.connect(self.image.invert())
+        self.Curve_PushButton.clicked.connect(self.image.curve(self.CurveRatio_Value.text()))
+        self.Resize_PushButton.clicked.connect(self.image.resize_image(self.Resize_X_Value.text(),
+                                                                       self.Resize_Y_Value.text()))
+        self.Save_PushButton.clicked.connect(self.image.save(self.FileName.text()))
 
-        self.setMinimumSize(QSize(100, 80))
-
-        self.setWindowTitle("Test title")
-
-        self.button = QPushButton("Test button")
-        self.button.setCheckable(True)
-        self.button.clicked.connect(self.tbwc)
-
-        self.setCentralWidget(self.button)  # Central Window Widget
-
-    def tbwc(self):
-        self.button.setText("Unclickable test button")
-        self.button.setEnabled(False)
-        print('Debug: Clicked the button')
+    def open_picture(self):
+        self.image = functions.open_image(file=self.FileName.text())
 
 
-ps = QApplication(sys.argv)  # sys.argv is used to allow usage of cmd args for our app
-
-window = MainWindow()  # creating window
-window.show()  # window is hidden by default
-
-ps.exec()  # cycle start point
-
-# OUT OF THE APP ZONE
+app = QApplication(sys.argv)
+ex = MyWidget()
+ex.show()
+sys.exit(app.exec_())
