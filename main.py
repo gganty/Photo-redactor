@@ -141,3 +141,4 @@ app = QApplication(sys.argv)
 ex = Window()
 ex.show()
 sys.exit(app.exec_())
+# ура
