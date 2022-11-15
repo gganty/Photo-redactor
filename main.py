@@ -2,34 +2,30 @@ import sys
 
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from PyQt5.QtWidgets import QFileDialog
-from window import Ui_MainWindow
+from PyQt5.QtWidgets import QFileDialog, QTableWidgetItem
+from dist.window import Ui_MainWindow
 from PIL import Image
-
-
-def mix(file_1, file_2, percentage_1st_photo):
-    if 1 >= percentage_1st_photo >= 0:
-        r, g, b = file_1
-        r2, g2, b2 = file_2
-        r = r * percentage_1st_photo + r2 * (1 - percentage_1st_photo)
-        g = g * percentage_1st_photo + g2 * (1 - percentage_1st_photo)
-        b = b * percentage_1st_photo + b2 * (1 - percentage_1st_photo)
-        return round(r), round(g), round(b)
-    else:
-        print('Mix percentage value must be between 0 and 1, both sides included.')
+import sqlite3
 
 
 class Window(QMainWindow, Ui_MainWindow):
     def get_file(self):
         self.file_name = QFileDialog.getOpenFileName(self, "Open file", '', "Image (*.png *.jpg)")
 
-    def update_image(self):
+    def update_all(self, activity):
         self.graphicsView.setPixmap(QPixmap())
         self.graphicsView.setPixmap(QPixmap(self.file_name[0]))
+        if activity:
+            self.cur.execute('''INSERT INTO actions (action) VALUES (?);''', (activity, ))
+            res = self.cur.execute('''SELECT * FROM actions;''').fetchall()
+            for i, row in enumerate(res):
+                self.tableWidget.setRowCount(self.tableWidget.rowCount() + 1)
+                for j, elem in enumerate(row):
+                    self.tableWidget.setItem(i, j, QTableWidgetItem(str(elem)))
 
     def change_a_picture(self):
         self.get_file()
-        self.update_image()
+        self.update_all(False)
 
     def browse_files(self):
         self.get_file()
@@ -39,15 +35,22 @@ class Window(QMainWindow, Ui_MainWindow):
             ),
             self.file_name[0].split('/')[-1]
         )
-        self.update_image()
+        self.update_all(False)
 
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.file_name = QFileDialog.getOpenFileName(self, "Open file", '', "Image (*.png *.jpg)")
         self.image = Picture(Image.open(self.file_name[0]), self.file_name[0].split('/')[-1])
-        self.update_image()
+        self.update_all(False)
         self.Open_PushButton.clicked.connect(lambda: self.change_a_picture())
+        self.con = sqlite3.connect('history.db')
+        self.cur = self.con.cursor()
+        res = self.cur.execute('''SELECT * FROM actions;''').fetchall()
+        for i, row in enumerate(res):
+            self.tableWidget.setRowCount(self.tableWidget.rowCount() + 1)
+            for j, elem in enumerate(row):
+                self.tableWidget.setItem(i, j, QTableWidgetItem(str(elem)))
 
         self.Crop_PushButton.clicked.connect(
             lambda: self.image.crop_image(
@@ -65,16 +68,16 @@ class Window(QMainWindow, Ui_MainWindow):
                 )
             )
         )
-        self.Crop_PushButton.clicked.connect(lambda: self.update_image())
+        self.Crop_PushButton.clicked.connect(lambda: self.update_all('Cropping'))
 
         self.BW_PushButton.clicked.connect(lambda: self.image.bw())
-        self.BW_PushButton.clicked.connect(lambda: self.update_image())
+        self.BW_PushButton.clicked.connect(lambda: self.update_all('Black/White'))
 
         self.Invert_PushButton.clicked.connect(lambda: self.image.invert())
-        self.Invert_PushButton.clicked.connect(lambda: self.update_image())
+        self.Invert_PushButton.clicked.connect(lambda: self.update_all('Inverting'))
 
         self.Curve_PushButton.clicked.connect(lambda: self.image.curve(self.CurveRatio_Value.text()))
-        self.Curve_PushButton.clicked.connect(lambda: self.update_image())
+        self.Curve_PushButton.clicked.connect(lambda: self.update_all('Brightening'))
 
         self.Resize_PushButton.clicked.connect(
             lambda: self.image.resize_image(
@@ -86,7 +89,7 @@ class Window(QMainWindow, Ui_MainWindow):
                 )
             )
         )
-        self.Resize_PushButton.clicked.connect(lambda: self.update_image())
+        self.Resize_PushButton.clicked.connect(lambda: self.update_all('Resizing'))
 
 
 class Picture:
@@ -138,3 +141,4 @@ app = QApplication(sys.argv)
 ex = Window()
 ex.show()
 sys.exit(app.exec_())
+# ура

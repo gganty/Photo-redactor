@@ -223,50 +223,10 @@
      <string>Curve</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="Save_PushButton">
-    <property name="geometry">
-     <rect>
-      <x>530</x>
-      <y>300</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Save</string>
-    </property>
-   </widget>
-   <widget class="QGraphicsView" name="graphicsView">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>10</y>
-      <width>381</width>
-      <height>251</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Open_PushButton">
     <property name="geometry">
      <rect>
-      <x>330</x>
+      <x>430</x>
       <y>270</y>
       <width>171</width>
       <height>61</height>
@@ -285,78 +245,6 @@
     </property>
     <property name="text">
      <string>Open</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="File1_PushButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>270</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Choose File1</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="File2_PushButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>300</y>
-      <width>91</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Choose File2</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="Combine_PushButton">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>280</y>
-      <width>141</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="sizePolicy">
-     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-      <horstretch>0</horstretch>
-      <verstretch>0</verstretch>
-     </sizepolicy>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>10</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Combine and display</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
@@ -381,6 +269,12 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDigitsOnly</set>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="Crop_X_Value_2">
     <property name="geometry">
@@ -390,6 +284,12 @@
       <width>71</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDigitsOnly</set>
+    </property>
+    <property name="text">
+     <string>1</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="Crop_Y_Value_1">
@@ -401,6 +301,12 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDigitsOnly</set>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="Crop_Y_Value_2">
     <property name="geometry">
@@ -410,6 +316,12 @@
       <width>71</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDigitsOnly</set>
+    </property>
+    <property name="text">
+     <string>1</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="CurveRatio_Value">
@@ -421,6 +333,12 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDigitsOnly</set>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
    </widget>
    <widget class="QLineEdit" name="Resize_X_Value">
     <property name="geometry">
@@ -430,6 +348,12 @@
       <width>71</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDigitsOnly</set>
+    </property>
+    <property name="text">
+     <string>0</string>
     </property>
    </widget>
    <widget class="QLineEdit" name="Resize_Y_Value">
@@ -441,16 +365,81 @@
       <height>21</height>
      </rect>
     </property>
+    <property name="inputMethodHints">
+     <set>Qt::ImhDigitsOnly</set>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
    </widget>
-   <widget class="QLineEdit" name="FileName">
+   <widget class="QLabel" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>280</y>
-      <width>91</width>
-      <height>21</height>
+      <x>230</x>
+      <y>20</y>
+      <width>381</width>
+      <height>241</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>230</x>
+      <y>0</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Preview:</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>270</y>
+      <width>221</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="horizontalScrollBarPolicy">
+     <enum>Qt::ScrollBarAlwaysOff</enum>
+    </property>
+    <property name="sizeAdjustPolicy">
+     <enum>QAbstractScrollArea::AdjustIgnored</enum>
+    </property>
+    <property name="autoScrollMargin">
+     <number>1</number>
+    </property>
+    <property name="verticalScrollMode">
+     <enum>QAbstractItemView::ScrollPerItem</enum>
+    </property>
+    <property name="horizontalScrollMode">
+     <enum>QAbstractItemView::ScrollPerItem</enum>
+    </property>
+    <property name="rowCount">
+     <number>1</number>
+    </property>
+    <property name="columnCount">
+     <number>2</number>
+    </property>
+    <attribute name="horizontalHeaderDefaultSectionSize">
+     <number>89</number>
+    </attribute>
+    <row/>
+    <column/>
+    <column/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -459,9 +448,15 @@
      <x>0</x>
      <y>0</y>
      <width>640</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuadditional_functions">
+    <property name="title">
+     <string>additional functions</string>
+    </property>
+   </widget>
+   <addaction name="menuadditional_functions"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
