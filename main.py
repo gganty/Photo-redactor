@@ -3,7 +3,7 @@ import sys
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtWidgets import QFileDialog, QTableWidgetItem
-from dist.window import Ui_MainWindow
+from window import Ui_MainWindow
 from PIL import Image
 import sqlite3
 
