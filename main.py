@@ -41,7 +41,7 @@ class Window(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.file_name = QFileDialog.getOpenFileName(self, "Open file", '', "Image (*.png *.jpg)")
-        self.image = Picture(Image.open(self.file_name[0]), self.file_name[0].split('/')[-1])
+        self.image = Picture(Image.open(self.file_name[0]), self.file_name[0].split('/')[-1], self.file_name[0])
         self.update_all(False)
         self.Open_PushButton.clicked.connect(lambda: self.change_a_picture())
         self.con = sqlite3.connect('history.db')
@@ -93,48 +93,59 @@ class Window(QMainWindow, Ui_MainWindow):
 
 
 class Picture:
-    def __init__(self, file, title):
+    def __init__(self, file, title, path):
         self.file = file
         self.title = title
+        self.path = path
         self.pixels = self.file.load()
         self.x, self.y = self.file.size
 
     def resize_image(self, x_axis, y_axis):
         self.file = self.file.resize((int(x_axis), int(y_axis)))
-        self.file.save(self.title)
+        self.file.save(self.path, 'jpeg')
 
     def crop_image(self, x_pos1, y_pos1, x_pos2, y_pos2):
         self.file = self.file.crop((int(x_pos1), int(y_pos1), int(x_pos2), int(y_pos2)))
-        self.file.save(self.title)
+        self.file.save(self.path, 'jpeg')
 
     def bw(self):
         for i in range(self.x):
             for j in range(self.y):
-                r, g, b = self.pixels[i, j]
+                if 'png' in self.path:
+                    r, g, b, a = self.pixels[i, j]
+                else:
+                    r, g, b = self.pixels[i, j]
                 a = (r + g + b) // 3
                 self.pixels[i, j] = a, a, a
-        self.file.save(self.title)
+        self.file.save(self.path)
 
     def invert(self):
         for i in range(self.x):
             for j in range(self.y):
-                r, g, b = self.pixels[i, j]
+                if 'png' in self.path:
+                    r, g, b, a = self.pixels[i, j]
+                else:
+                    r, g, b = self.pixels[i, j]
                 self.pixels[i, j] = 255 - r, 255 - g, 255 - b
-        self.file.save(self.title)
+        self.file.save(self.path)
 
     def curve(self, ratio):
         ratio = int(ratio)
         for i in range(self.x):
             for j in range(self.y):
-                r, g, b = self.pixels[i, j]
-                brightness = r + g + b if r + g + b > 0 else 1
+                if 'png' in self.path:
+                    r, g, b, a = self.pixels[i, j]
+                    brightness = r + g + b if r + g + b > 0 else 1
+                else:
+                    r, g, b = self.pixels[i, j]
+                    brightness = r + g + b if r + g + b > 0 else 1
                 if brightness < ratio:
                     k = ratio / brightness
                     self.pixels[i, j] = min(255, int(r * k ** 2)), min(255, int(g * k ** 2)), min(255,
                                                                                                   int(b * k ** 2))
                 else:
                     self.pixels[i, j] = r, g, b
-        self.file.save(self.title)
+        self.file.save(self.path)
 
 
 app = QApplication(sys.argv)
