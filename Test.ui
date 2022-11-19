@@ -442,6 +442,9 @@
     <column/>
    </widget>
    <widget class="QPushButton" name="File1_open">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -461,6 +464,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="File2_open">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>240</x>
@@ -480,6 +486,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="Combine_PushButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>330</x>
